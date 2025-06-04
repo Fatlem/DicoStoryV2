@@ -4,7 +4,6 @@ class NotificationHelper {
       console.log('Service Worker tidak didukung di browser ini');
       return null;
     }
-
     try {
       const registration = await navigator.serviceWorker.register('./sw.js', {
         scope: './',
@@ -22,18 +21,15 @@ class NotificationHelper {
       console.log('Browser tidak mendukung notifikasi');
       return false;
     }
-
     const result = await Notification.requestPermission();
     if (result === 'denied') {
       console.log('Fitur notifikasi tidak diizinkan');
       return false;
     }
-
     if (result === 'default') {
       console.log('Pengguna menutup kotak dialog permintaan izin');
       return false;
     }
-
     return true;
   }
 
@@ -46,7 +42,6 @@ class NotificationHelper {
       console.error('Service Worker tidak aktif');
       return;
     }
-
     const vapidPublicKey = await this.getVapidPublicKey();
     const convertedVapidKey = this._urlBase64ToUint8Array(vapidPublicKey);
 
@@ -67,7 +62,6 @@ class NotificationHelper {
 
   static async _sendSubscriptionToServer(subscription) {
     const token = localStorage.getItem('token');
-
     if (!token) {
       console.log('User perlu login untuk menerima notifikasi');
       return;
