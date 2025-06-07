@@ -1,6 +1,6 @@
 class NotificationHelper {
   static async registerServiceWorker() {
-    if (('serviceWorker' in navigator)) {
+    if (!('serviceWorker' in navigator)) {
       console.log('Service Worker tidak didukung di browser ini');
       return null;
     }
